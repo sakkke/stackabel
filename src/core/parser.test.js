@@ -1,5 +1,13 @@
 import Parser from './parser'
 
+test('Parser.eval', () => {
+  const code = '1 1 :add'
+  const expected = [{ type: 'number', value: 2 }]
+  const parser = new Parser(code)
+  parser.eval()
+  expect(parser.stack).toEqual(expected)
+})
+
 test('Parser.tokens', () => {
   const code = [
     '1 1 :add foo :set',
