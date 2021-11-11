@@ -19,6 +19,25 @@ test('Parser.parse', () => {
   expect(parser.parse()).toEqual(expected)
 })
 
+test('Parser.preprocess', () => {
+  const code = '1 1 :add'
+  const expected = [
+    { type: 'number', value: 1 },
+    { type: 'number', value: 1 },
+    { argN: 2, type: 'operator', value: 'add' },
+  ]
+  const parser = new Parser(code)
+  expect(parser.preprocess()).toEqual(expected)
+})
+
+test('Parser.preprocess 2', () => {
+  const code = ':foo'
+  const parser = new Parser(code)
+  expect(() => {
+    parser.preprocess()
+  }).toThrow()
+})
+
 test('Parser.tokens', () => {
   const code = [
     '1 1 :add foo :set',
