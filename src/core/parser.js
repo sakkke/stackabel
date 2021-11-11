@@ -1,6 +1,8 @@
 import * as operators from '../operators/index'
 
 export default class {
+  stack = []
+
   constructor (code = '') {
     this.code = code
   }
@@ -10,6 +12,22 @@ export default class {
       .split('\n')
       .flatMap(token => token.split(' '))
     return tokens
+  }
+
+  eval () {
+    const preprocessed = this.preprocess()
+    preprocessed.forEach(map => {
+      if (map.type === 'operator') {
+        const { argN } = map
+        const args = this.popStack(argN)
+        const operatorName = map.value
+        const operator = new operators[operatorName](args)
+        const result = operator.body()
+        this.stack.push(result)
+      } else {
+        this.stack.push(map)
+      }
+    })
   }
 
   parse () {
