@@ -1,3 +1,5 @@
+import * as operators from '../operators/index'
+
 export default class {
   constructor (code = '') {
     this.code = code
@@ -29,6 +31,29 @@ export default class {
         default:
           return createResult(token, 'string')
       }
+    })
+    return result
+  }
+
+  popStack (n) {
+    const result = this.stack.slice(-n)
+    this.stack = this.stack.slice(0, -n)
+    return result
+  }
+
+  preprocess () {
+    const parsed = this.parse()
+    const result = parsed.map(map => {
+      if (map.type !== 'operator') return map
+
+      const operatorName = map.value
+
+      if (!Object.keys(operators).includes(operatorName)) {
+        throw new Error(`operator: ${operatorName} is not exists`)
+      }
+
+      const result = Object.assign({}, map, { argN: operators[operatorName].argN })
+      return result
     })
     return result
   }
