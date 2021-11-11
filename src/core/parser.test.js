@@ -8,6 +8,17 @@ test('Parser.eval', () => {
   expect(parser.stack).toEqual(expected)
 })
 
+test('Parser.parse', () => {
+  const code = '1 1 :add'
+  const expected = [
+    { type: 'number', value: 1 },
+    { type: 'number', value: 1 },
+    { type: 'operator', value: 'add' },
+  ]
+  const parser = new Parser(code)
+  expect(parser.parse()).toEqual(expected)
+})
+
 test('Parser.tokens', () => {
   const code = [
     '1 1 :add foo :set',
