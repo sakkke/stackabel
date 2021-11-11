@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "stackabel isnt a typo",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "build": "esbuild --bundle --minify --outdir=dist --sourcemap src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
