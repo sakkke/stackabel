@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/sakkke/stackabel/issues"
   },
-  "homepage": "https://github.com/sakkke/stackabel#readme"
+  "homepage": "https://github.com/sakkke/stackabel#readme",
+  "devDependencies": {
+    "esbuild": "^0.13.13"
+  }
 }
