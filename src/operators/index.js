@@ -1,4 +1,5 @@
 export { default as add } from './add'
+export { default as div } from './div'
 export { default as get } from './get'
 export { default as mul } from './mul'
 export { default as set } from './set'
