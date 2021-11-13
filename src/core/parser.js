@@ -1,6 +1,7 @@
 import * as operators from '../operators/index'
 
 export default class {
+  namespace = new Map()
   stack = []
 
   constructor (code = '') {
@@ -22,7 +23,17 @@ export default class {
         const args = this.popStack(argN)
         const operatorName = item.value
         const operator = new operators[operatorName](args)
+
+        for (const [key, value] of this.namespace) {
+          operator.namespace.set(key, value)
+        }
+
         const result = operator.body()
+
+        for (const [key, value] of operator.namespace) {
+          this.namespace.set(key, value)
+        }
+
         if (result !== undefined) this.stack.push(result)
       } else {
         this.stack.push(item)
