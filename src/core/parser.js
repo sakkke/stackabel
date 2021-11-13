@@ -23,7 +23,7 @@ export default class {
         const operatorName = map.value
         const operator = new operators[operatorName](args)
         const result = operator.body()
-        this.stack.push(result)
+        if (result !== undefined) this.stack.push(result)
       } else {
         this.stack.push(map)
       }
