@@ -54,7 +54,7 @@ export default class {
   }
 
   popStack (n) {
-    const result = this.stack.slice(-n)
+    const result = [...this.stack.slice(-n)].reverse()
     this.stack = this.stack.slice(0, -n)
     return result
   }
