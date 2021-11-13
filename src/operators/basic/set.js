@@ -1,4 +1,4 @@
-import Operator from '../core/operator'
+import Operator from '../../core/operator'
 
 export default class extends Operator {
   static argN = 2

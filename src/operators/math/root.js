@@ -1,4 +1,4 @@
-import Operator from '../core/operator'
+import Operator from '../../core/operator'
 
 export default class extends Operator {
   static argN = 2
@@ -8,7 +8,7 @@ export default class extends Operator {
     const b = this.args[1].value
     return {
       type: 'number',
-      value: a % b,
+      value: Math.pow(b, 1 / a),
     }
   }
 }

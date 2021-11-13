@@ -1,4 +1,4 @@
-import Operator from '../core/operator'
+import Operator from '../../core/operator'
 
 export default class extends Operator {
   static argN = 1
@@ -7,7 +7,7 @@ export default class extends Operator {
     const a = this.args[0].value
     return {
       type: 'number',
-      value: Math.cos(a),
+      value: Math.sin(a),
     }
   }
 }

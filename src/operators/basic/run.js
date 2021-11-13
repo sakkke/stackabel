@@ -1,5 +1,5 @@
-import Operator from '../core/operator'
-import Parser from '../core/parser'
+import Operator from '../../core/operator'
+import Parser from '../../core/parser'
 
 export default class extends Operator {
   static argN = 1

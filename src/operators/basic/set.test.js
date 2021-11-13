@@ -1,4 +1,4 @@
-import Parser from '../core/parser'
+import Parser from '../../core/parser'
 import SetOperator from './set'
 
 test('42 a :set', () => {

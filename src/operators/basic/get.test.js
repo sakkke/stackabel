@@ -1,4 +1,4 @@
-import Parser from '../core/parser'
+import Parser from '../../core/parser'
 import GetOperator from './get'
 
 test('42 a :set a :get', () => {
