@@ -19,6 +19,20 @@ test('Parser.parse', () => {
   expect(parser.parse()).toEqual(expected)
 })
 
+test('Parser.parse 2', () => {
+  const code = '+1 -1 1.0 +1.0 -1.0 ok'
+  const expected = [
+    { type: 'number', value: 1 },
+    { type: 'number', value: -1 },
+    { type: 'number', value: 1.0 },
+    { type: 'number', value: 1.0 },
+    { type: 'number', value: -1.0 },
+    { type: 'string', value: 'ok' },
+  ]
+  const parser = new Parser(code)
+  expect(parser.parse()).toEqual(expected)
+})
+
 test('Parser.preprocess', () => {
   const code = '1 1 :add'
   const expected = [
