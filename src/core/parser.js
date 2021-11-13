@@ -16,16 +16,16 @@ export default class {
 
   eval () {
     const preprocessed = this.preprocess()
-    preprocessed.forEach(map => {
-      if (map.type === 'operator') {
-        const { argN } = map
+    preprocessed.forEach(item => {
+      if (item.type === 'operator') {
+        const { argN } = item
         const args = this.popStack(argN)
-        const operatorName = map.value
+        const operatorName = item.value
         const operator = new operators[operatorName](args)
         const result = operator.body()
         if (result !== undefined) this.stack.push(result)
       } else {
-        this.stack.push(map)
+        this.stack.push(item)
       }
     })
   }
@@ -61,16 +61,16 @@ export default class {
 
   preprocess () {
     const parsed = this.parse()
-    const result = parsed.map(map => {
-      if (map.type !== 'operator') return map
+    const result = parsed.map(item => {
+      if (item.type !== 'operator') return item
 
-      const operatorName = map.value
+      const operatorName = item.value
 
       if (!Object.keys(operators).includes(operatorName)) {
         throw new Error(`operator: ${operatorName} is not exists`)
       }
 
-      const result = Object.assign({}, map, { argN: operators[operatorName].argN })
+      const result = Object.assign({}, item, { argN: operators[operatorName].argN })
       return result
     })
     return result
