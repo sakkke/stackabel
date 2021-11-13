@@ -20,7 +20,7 @@ test('Parser.parse', () => {
 })
 
 test('Parser.parse 2', () => {
-  const code = '+1 -1 1.0 +1.0 -1.0 ok'
+  const code = '+1 -1 1.0 +1.0 -1.0 ok true false'
   const expected = [
     { type: 'number', value: 1 },
     { type: 'number', value: -1 },
@@ -28,6 +28,8 @@ test('Parser.parse 2', () => {
     { type: 'number', value: 1.0 },
     { type: 'number', value: -1.0 },
     { type: 'string', value: 'ok' },
+    { type: 'boolean', value: true },
+    { type: 'boolean', value: false },
   ]
   const parser = new Parser(code)
   expect(parser.parse()).toEqual(expected)

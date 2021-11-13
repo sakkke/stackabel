@@ -1,6 +1,10 @@
 import * as operators from '../operators/index'
 
 export default class {
+  #constantMap = {
+    false: false,
+    true: true,
+  }
   namespace = new Map()
   stack = []
 
@@ -48,6 +52,9 @@ export default class {
 
     const result = this.tokens.map(token => {
       switch (true) {
+        case /^(true|false)$/.test(token):
+          return createResult(this.#constantMap[token], 'boolean')
+
         case /^[+-]?\d+(\.\d+)?$/.test(token):
           const number = parseInt(token, 10)
           return createResult(number, 'number')
