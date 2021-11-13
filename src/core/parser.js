@@ -49,7 +49,7 @@ export default class {
 
     const result = this.tokens.map(token => {
       switch (true) {
-        case /\d+/.test(token):
+        case /^\d+$/.test(token):
           const number = parseInt(token, 10)
           return createResult(number, 'number')
 
