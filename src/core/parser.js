@@ -15,8 +15,7 @@ export default class {
     return tokens
   }
 
-  eval () {
-    const preprocessed = this.preprocess()
+  eval (preprocessed = this.preprocess()) {
     preprocessed.forEach(item => {
       if (item.type === 'operator') {
         const { argN } = item
@@ -53,7 +52,7 @@ export default class {
           const number = parseInt(token, 10)
           return createResult(number, 'number')
 
-        case /^:/.test(token):
+        case /^:(?!:)/.test(token):
           const operatorName = token.slice(1)
           return createResult(operatorName, 'operator')
 
@@ -70,8 +69,7 @@ export default class {
     return result
   }
 
-  preprocess () {
-    const parsed = this.parse()
+  preprocess (parsed = this.parse()) {
     const result = parsed.map(item => {
       if (item.type !== 'operator') return item
 

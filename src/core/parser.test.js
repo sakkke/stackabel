@@ -64,3 +64,22 @@ test('Parser.tokens', () => {
   const parser = new Parser(code)
   expect(parser.tokens).toEqual(expected)
 })
+
+test('example code', () => {
+  const code = [
+    '1', 'i', ':set',
+    'i', '::get',
+    '1', '::add',
+    'i', '::set',
+    ':defer',
+    'increment', ':set',
+    'increment', ':get',
+    ':run',
+    'increment', ':get',
+    ':run',
+    'i', ':get',
+  ].join(' ')
+  const parser = new Parser(code)
+  parser.eval()
+  expect(parser.stack).toEqual([{ type: 'number', value: 3 }])
+})
