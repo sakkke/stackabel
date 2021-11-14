@@ -7,6 +7,7 @@ export default class {
   }
   namespace = new Map()
   stack = []
+  substack = []
 
   constructor (code = '') {
     this.code = code
@@ -31,11 +32,15 @@ export default class {
           operator.namespace.set(key, value)
         }
 
+        operator.substack = this.substack
+
         const result = operator.body()
 
         for (const [key, value] of operator.namespace) {
           this.namespace.set(key, value)
         }
+
+        this.substack = operator.substack
 
         if (result !== undefined) this.stack.push(result)
       } else {

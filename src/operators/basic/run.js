@@ -13,11 +13,15 @@ export default class extends Operator {
       parser.namespace.set(key, value)
     }
 
+    parser.substack = this.substack
+
     parser.eval(preprocessed)
 
     for (const [key, value] of parser.namespace) {
       this.namespace.set(key, value)
     }
+
+    this.substack = parser.substack
 
     const result = parser.stack.at(-1)
     return result

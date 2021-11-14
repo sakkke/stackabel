@@ -14,11 +14,15 @@ export default class extends Operator {
       operatorA.namespace.set(key, value)
     }
 
+    operatorA.substack = this.substack
+
     const condition = operatorA.body()
 
     for (const [key, value] of operatorA.namespace) {
       this.namespace.set(key, value)
     }
+
+    this.substack = operatorA.substack
 
     if (condition.value) {
       const operatorB = new RunOperator([b])
@@ -27,11 +31,15 @@ export default class extends Operator {
         operatorB.namespace.set(key, value)
       }
 
+      operatorB.substack = this.substack
+
       const result = operatorB.body()
 
       for (const [key, value] of operatorB.namespace) {
         this.namespace.set(key, value)
       }
+
+      this.substack = operatorB.substack
 
       return result
     } else {
@@ -41,11 +49,15 @@ export default class extends Operator {
         operatorC.namespace.set(key, value)
       }
 
+      operatorC.substack = this.substack
+
       const result = operatorC.body()
 
       for (const [key, value] of operatorC.namespace) {
         this.namespace.set(key, value)
       }
+
+      this.substack = operatorC.substack
 
       return result
     }
