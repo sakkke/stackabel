@@ -85,3 +85,39 @@ test('example code', () => {
   parser.eval()
   expect(parser.stack).toEqual([{ type: 'number', value: 3 }])
 })
+
+test('example code 2', () => {
+  const code = [
+    'no', ':defer',
+    'c', ':set',
+    'yes', ':defer',
+    'b', ':set',
+    'true', ':defer',
+    'a', ':set',
+    'c', ':get',
+    'b', ':get',
+    'a', ':get',
+    ':if',
+  ].join(' ')
+  const parser = new Parser(code)
+  parser.eval()
+  expect(parser.stack).toEqual([{ type: 'string', value: 'yes' }])
+})
+
+test('example code 3', () => {
+  const code = [
+    'no', ':defer',
+    'c', ':set',
+    'yes', ':defer',
+    'b', ':set',
+    'false', ':defer',
+    'a', ':set',
+    'c', ':get',
+    'b', ':get',
+    'a', ':get',
+    ':if',
+  ].join(' ')
+  const parser = new Parser(code)
+  parser.eval()
+  expect(parser.stack).toEqual([{ type: 'string', value: 'no' }])
+})
