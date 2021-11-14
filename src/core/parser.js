@@ -28,19 +28,9 @@ export default class {
         const operatorName = item.value
         const operator = new operators[operatorName](args)
 
-        for (const [key, value] of this.namespace) {
-          operator.namespace.set(key, value)
-        }
-
-        operator.substack = this.substack
-
+        operator.syncFields(this)
         const result = operator.body()
-
-        for (const [key, value] of operator.namespace) {
-          this.namespace.set(key, value)
-        }
-
-        this.substack = operator.substack
+        this.syncFields(operator)
 
         if (result !== undefined) this.stack.push(result)
       } else {
@@ -95,5 +85,13 @@ export default class {
       return result
     })
     return result
+  }
+
+  syncFields (target) {
+    for (const [key, value] of target.namespace) {
+      this.namespace.set(key, value)
+    }
+
+    this.substack = target.substack
   }
 }

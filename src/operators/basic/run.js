@@ -9,19 +9,9 @@ export default class extends Operator {
     const parsed = this.args[0].value
     const preprocessed = parser.preprocess(parsed)
 
-    for (const [key, value] of this.namespace) {
-      parser.namespace.set(key, value)
-    }
-
-    parser.substack = this.substack
-
+    parser.syncFields(this)
     parser.eval(preprocessed)
-
-    for (const [key, value] of parser.namespace) {
-      this.namespace.set(key, value)
-    }
-
-    this.substack = parser.substack
+    this.syncFields(parser)
 
     const result = parser.stack.at(-1)
     return result

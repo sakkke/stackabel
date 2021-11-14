@@ -10,54 +10,24 @@ export default class extends Operator {
     const c = this.args[2]
     const operatorA = new RunOperator([a])
 
-    for (const [key, value] of this.namespace) {
-      operatorA.namespace.set(key, value)
-    }
-
-    operatorA.substack = this.substack
-
+    operatorA.syncFields(this)
     const condition = operatorA.body()
-
-    for (const [key, value] of operatorA.namespace) {
-      this.namespace.set(key, value)
-    }
-
-    this.substack = operatorA.substack
+    this.syncFields(operatorA)
 
     if (condition.value) {
       const operatorB = new RunOperator([b])
 
-      for (const [key, value] of this.namespace) {
-        operatorB.namespace.set(key, value)
-      }
-
-      operatorB.substack = this.substack
-
+      operatorB.syncFields(this)
       const result = operatorB.body()
-
-      for (const [key, value] of operatorB.namespace) {
-        this.namespace.set(key, value)
-      }
-
-      this.substack = operatorB.substack
+      this.syncFields(operatorB)
 
       return result
     } else {
       const operatorC = new RunOperator([c])
 
-      for (const [key, value] of this.namespace) {
-        operatorC.namespace.set(key, value)
-      }
-
-      operatorC.substack = this.substack
-
+      operatorC.syncFields(this)
       const result = operatorC.body()
-
-      for (const [key, value] of operatorC.namespace) {
-        this.namespace.set(key, value)
-      }
-
-      this.substack = operatorC.substack
+      this.syncFields(operatorC)
 
       return result
     }

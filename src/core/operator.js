@@ -10,4 +10,12 @@ export default class {
   body () {
     return undefined
   }
+
+  syncFields (target) {
+    for (const [key, value] of target.namespace) {
+      this.namespace.set(key, value)
+    }
+
+    this.substack = target.substack
+  }
 }
