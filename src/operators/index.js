@@ -1,4 +1,5 @@
 export { default as add } from './math/add'
+export { default as clone } from './basic/clone'
 export { default as cos } from './math/cos'
 export { default as defer } from './basic/defer'
 export { default as div } from './math/div'
