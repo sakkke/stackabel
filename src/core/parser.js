@@ -93,6 +93,7 @@ export default class {
       this.namespace.set(key, value)
     }
 
+    this.stack.push(...target.result)
     this.substack = target.substack
   }
 }
