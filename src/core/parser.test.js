@@ -134,3 +134,19 @@ test('example code 4', () => {
   parser.eval()
   expect(parser.stack).toEqual([{ type: 'string', value: 'ok' }])
 })
+
+test('example code 5', () => {
+  const code = [
+    '::pop', 'x', '::set',
+    '::pop', 'y', '::set',
+    '::pop', 'z', '::set',
+    'x', '::get', '::print',
+    'y', '::get', '::print',
+    'z', '::get', '::print',
+    ':defer', 'tarai', ':set',
+    '14', '7', '0', ':push', ':push', ':push',
+    'tarai', ':get', ':run',
+  ].join(' ')
+  const parser = new Parser(code)
+  parser.eval()
+})
