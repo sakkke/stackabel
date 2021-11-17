@@ -2,6 +2,7 @@ export default class {
   static argN = 0
   namespace = new Map()
   result = []
+  stack = []
   substack = []
 
   constructor (args) {
@@ -17,6 +18,7 @@ export default class {
       this.namespace.set(key, value)
     }
 
+    this.stack = target.stack
     this.substack = target.substack
   }
 }
